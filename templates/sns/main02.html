@@ -1,0 +1,136 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+  <!-- 구글 머티리얼 아이콘을 삽입하기 위해선 구글 머티리얼의 링크도 꼭 삽입 해줘야한다 -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,1,200" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,1,200" />
+
+  <title>여기에 나의 인스타그램 만들꺼임 </title>
+</head>
+
+<!--밑에 컨텐츠에 사용하기 위한 설정 -->
+<!-- .main_body >>
+메인 div  안에 화면 분리 좌 / 우  화면을 나누는 div를  만들어줫다
+그냥 div로 나누면 상하로 나뉘지만 display felx 설정하면  좌 우로 나뉜다 + 휠로 스크롤 하였을때 상단바와 겹치지 않게 paddin-top으로 50정도 거리를 만듬
+justify-content: center를 추가하여 비율이 망가지지 않게 중앙 정렬을 위해서 작성-->
+
+<!--.left_body >> 왼쪽 창이 왼쪽 벽에서 조금 떨어지도록 margin-right :100 px를 넣어줌-->
+
+<!--.righy_body >> 오른쪽 창 스크롤 했을때 고정되어야하기 때문에 position: fixed를 넣고 div 위치를 왼쪽과 떼어놓기 위해 left:70%를 넣는다 -->
+
+
+
+<style>
+.main_body {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+
+.left_body {
+    background-color: skyblue;
+    margin-right: 100px;
+    width: 700px;
+    height: 2000px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.right_body {
+    background-color: gray;
+    width: 300px;
+    height: 1000px;
+    left: 70%;
+    position: fixed
+}
+
+
+.feed_box {
+    background-color: white;
+    width: 600px;
+    margin: 10px;
+    height: 600px;
+}
+</style>
+
+
+<body>
+
+ <!--내비게이션 바 설정 부분 + 상단바가 휠로 내려도 고정되도록 설정 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="width: 100%; height: 50px; position: fixed;">
+  <div class="container">
+
+    <!--네비게이션 바에 이미지를 넣어줌 (img) /이미지의 크기를 설정해준다 (img style="height: 30px; object-fit: contain")-->
+    <img style="height: 30px; object-fit: contain"
+      src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZM8VmqmkufkgPLazrMBvtag4b7gWEJEuGw&usqp=CAU'>
+    <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
+
+    <!--구글 머티리얼 아이콘 삽입 부분-->
+    <div>
+      <span class="material-symbols-outlined">home</span>
+      <span class="material-symbols-outlined">chat_bubble</span>
+      <span class="material-symbols-outlined">favorite</span>
+      <span class="material-symbols-outlined">share</span>
+      <span class="material-symbols-outlined">settings</span>
+    </div>
+  </div>
+</nav>
+
+<!--바디 부분-->
+
+ <!--div안에 div를 새로 만들어주고 class=border하여 테두리선을 표시/ 배경색은 흰색으로 지정하고 margin으로 정사각형을 만들어줌 -->
+<div class="main_body">
+  <div class="left_body">
+    <div class="border feed_box">
+    컨텐츠1
+    </div>
+
+    <div class="border feed_box">
+    컨텐츠2
+    </div>
+
+    <div class="border feed_box">
+    컨텐츠3
+    </div>
+
+    <div class="border feed_box">
+    컨텐츠4
+    </div>
+
+    <div class="border feed_box">
+    컨텐츠5
+    </div>
+  </div>
+  <div class="right_body">
+  <!--스크롤 했을때 고정되어야하기 때문에 position: fixed를 넣고 div 위치를 왼쪽과 떼어놓기 위해 left:70%를 넣는다 -->
+  <div style="background-color: gray; width: 150px; height: 1000px; left: 70%; position: fixed">
+    오른쪽화면
+  </div >
+</div>
+
+<h1>글을 작성할 부분</h1>
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+-->
+</body>
+</html>
