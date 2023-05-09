@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os # os 모듈은 운영체제와 상호작용하기 위한 함수를 제공한다
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-&&^(lf5h2#&9w1z=z)!a4w23a#u_kw1z)6v53ykfpjgt!#%ts$
 # 그냥 실행하면 오류가 발생하여 만든 html파일이 나타나지 않음 DEBUG = False를 해줌으로 써 오류해결
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,7 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'content'
+    'content',
+    'user',
+
+
+
 ]
 
 MIDDLEWARE = [
@@ -82,6 +88,8 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'user.User'
+# 만든 앱 이름이 user이고 모델이름이 User이다
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -117,9 +125,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

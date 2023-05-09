@@ -2,6 +2,7 @@
 
 <html lang="en">
 <head>
+  {% load static %}
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +13,7 @@
 
   <!-- 구글 머티리얼 아이콘을 삽입하기 위해선 구글 머티리얼의 링크도 꼭 삽입 해줘야한다 -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,1,200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
   <!--  jquery 사용하기 위해서 작성해줘야함-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" >
@@ -289,7 +291,7 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
 
     <!--네비게이션 바에 이미지를 넣어줌 (img) /이미지의 크기를 설정해준다 (img style="height: 30px; object-fit: contain")-->
     <img style="height: 30px; object-fit: contain"
-      src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKsAAAEnCAMAAADhM0M8AAAAPFBMVEX///8AAAA2NjYICAg8PDxXV1fs7OwVFRWCgoKPj4+SkpKdnZ2Dg4MsLCwzMzNQUFD19fVAQEBWVlYnJydk46rtAAABGUlEQVR4nO3cSQ7CMBBFwZh5CgS4/11RLtBeQLcC1Fv/Ra1bsodBkiQldTwEnSol50hymRdjC7pWWm+RpM2LVTTYVFq3kWTNysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK2rdOu7Km8C1v37qcWHNizYk1J9acWHNizYk1J9acWHNizYk1px+z7gt703r/5A2o1z/ds1hZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVm/3/roWp/RYqy0hv/qtkqJJEmSJEmSJEmSJEmSJEmSFtoLPv5Nd0mkiHgAAAAASUVORK5CYII=">
+      src = "https://www.pngmart.com/files/14/H-Letter-Transparent-Images-PNG.png">
     <input class="form-control" style="width: 300px" type="search" placeholder="Search" aria-label="Search">
 
     <!--구글 머티리얼 아이콘 삽입 부분-->
@@ -320,7 +322,7 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
         </div>
         <span class="feed_name_txt">{{ feed.user_id }}</span>
       </div>
-      <img class="feed_img" src ="{{ feed.image }}">
+      <img class="feed_img" src ="{% get_media_prefix %}{{ feed.image }}"> <!--여기 좀 봐바-->
       <div class="feed_icon">
         <div>
           <!--좋아요 이모티콘-->
@@ -523,7 +525,7 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
         </div>
     </div>
 </div>
-<!--1번인 모달창애서 이미지를 업로드하고 이미지 옆에 설명을 쓸수 있도록 추가한 모달창-->
+<!-- 2. 1번인 모달창애서 이미지를 업로드하고 이미지 옆에 설명을 쓸수 있도록 추가한 모달창-->
 <div id="modal_add_feed_content" class="modal modal_overlay_content"> <!--modal_feed_content는 글쓰는 곳까지 추가된 modal이다-->
     <div class="modal_window">
         <div class="modal_title">
@@ -571,17 +573,8 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
         modal.style.top = window.pageYOffset + 'px'; //top을 이용해서 시작 y위치를 바꿔줌 >  위치로 바꿔줬습니다. 이제 스크롤을 내려도 정확한 위치에 모달이 뜨게 됨
         modal.style.display = "flex";
         document.body.style.overflowY = "hidden"; // 스크롤없애기
-
-        console.log(window.pageYOffset + "위치"); //로그 찍기 > 개발자 모드에서 우리가 적은 로그를 확인 할 수 있다 ,window.pageYOffset은 현재 화면에 y 위치를 알려준다
     });
 
-    // 모달 닫기 코드
-    const buttonCloseModal = document.getElementById("close_modal");
-    buttonCloseModal.addEventListener("click", e => {
-        modal.style.display = "none";
-        document.body.style.overflowY = "visible";
-        });
-<!--
   //    const      modal = document              .getElementById        ("modal_add_feed");
   // 상수 만들기 / 이름 모달 / 문서에서(main.html) / id값으로 element를 찾을께 / id는 이거야
 
@@ -594,7 +587,31 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
 -->
 
 
-<!-- jquery부분 //이미지를 드래그앤 드롭하면 색이 바뀜 -->
+<!-- 여기부터 jquery부분-->
+<!--모달 닫기-->
+$('.close_modal').on("click", () => {
+    closeModal();
+});
+
+$('#move_home').on("click",() =>{
+    $('#modal_add_feed_content').css({
+        top: window.pageYOffset + 'px',
+        display: 'flex'
+    });
+    $(document.body).css({
+        overflowY: "hidden"
+    });
+});
+
+function closeModal() {
+    $('.modal').css({
+        display : 'none'
+    });
+    $(document.body).css({
+        overflowY : 'visible'
+    });
+};
+<!--이미지를 드래그앤 드롭하면 색이 바뀜 -->
 
 $('.modal_image_upload')
     .on("dragover", dragOver)
@@ -618,27 +635,28 @@ function dragOver(e){
     }
 }
 
-//마우스를 놨을때 실행되는 함수
+<!--마우스를 놨을때 실행되는 함수-->
+let files;
 function uploadFiles(e){
-        e.stopPropagation();
-        e.preventDefault();
-        console.log(e.dataTransfer)
-        console.log(e.originalEvent.dataTransfer)
+    e.stopPropagation();
+    e.preventDefault();
+    console.log(e.dataTransfer)
+    console.log(e.originalEvent.dataTransfer)
 
-        e.dataTransfer = e.originalEvent.dataTransfer;
+    e.dataTransfer = e.originalEvent.dataTransfer;
 
-        files = e.dataTransfer.files;
+    files = e.dataTransfer.files;
 
 
 
-//경고창을 띄워주는 코드
+<!--경고창을 띄워주는 코드-->
 if (files.length > 1) {
     alert('하나만 올려라.');
     return;
 }
 
-
-// 파일이 이미지 인지 아닌지 확인
+<!--모달 1번을 보이지 않게 하고 modal2보이게 하는 코드 // 이미지 > 이미지+설명-->
+<!-- 파일이 이미지 인지 아닌지 확인-->
 if (files[0].type.match(/image.*/)) {
     $('#modal_add_feed_content').css({
         display : 'flex'
@@ -658,6 +676,71 @@ if (files[0].type.match(/image.*/)) {
     return;
 }
 };
+
+
+
+<!--데이터를 긁어오는 역할-->
+$('#button_write_feed').on('click', ()=>{
+    const image = $('#input_image').css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1');
+    const content = $('#input_content').val();
+    const profile_image = $('#input_profile_image').attr('src');
+    const user_id = $('#input_user_id').text();
+
+    const file = files[0];
+
+    let fd = new FormData();
+
+    fd.append('file', file);
+    fd.append('image', image);
+    fd.append('content', content);
+    fd.append('profile_image', profile_image);
+    fd.append('user_id', user_id);
+
+    if(image.length <= 0)
+    {
+        alert("이미지가 비어있습니다.");
+    }
+    else if(content.length <= 0)
+    {
+        alert("설명을 입력하세요");
+    }
+    else if(profile_image.length <= 0)
+    {
+        alert("프로필 이미지가 비어있습니다.");
+    }
+    else if(user_id.length <= 0)
+    {
+        alert("사용자 id가 없습니다.");
+    }
+    else{
+        writeFeed(fd);
+        console.log(files[0]);
+    }
+});
+
+<!--데이터를 서버로 전송하는 역할-->
+function writeFeed(fd) {
+    $.ajax({
+        url: "/content/upload",
+        data: fd,
+        method: "POST",
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            console.log("성공");
+        },
+        error: function (request, status, error) {
+            console.log("에러");
+        },
+        complete: function() {
+            console.log("무조건실행");
+            closeModal();
+            location.reload();
+        }
+    })
+};
+
+
 </script>
 
 
