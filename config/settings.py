@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import os # os 모듈은 운영체제와 상호작용하기 위한 함수를 제공한다
+import os  # os 모듈은 운영체제와 상호작용하기 위한 함수를 제공한다
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +27,6 @@ SECRET_KEY = 'django-insecure-&&^(lf5h2#&9w1z=z)!a4w23a#u_kw1z)6v53ykfpjgt!#%ts$
 # SECURITY WARNING: don't run with debug turned on in production!
 # 그냥 실행하면 오류가 발생하여 만든 html파일이 나타나지 않음 DEBUG = False를 해줌으로 써 오류해결
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'content',
     'user',
+    'config'
 
 
 

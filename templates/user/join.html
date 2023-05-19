@@ -85,7 +85,7 @@
         console.log('이멜 :' + email + ', 이름 :'  + name + ', 사용자이름 :'  +  user_id + ', 비밀번호 :'  +  password);
 
         $.ajax({
-            url: "user/join",
+            url: "/user/join",
             data: {
                 email: email,
                 password: password,
@@ -96,7 +96,7 @@
             dataType: "json",
             success: function (data){
                 alert(data.message);
-                location.replace('{% url 'login' %}');
+                location.replace("{% url 'login' %}");
             },
             error:function (request, status, error){
                 let data = JSON.parse(request.responseText);

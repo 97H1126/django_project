@@ -2,10 +2,10 @@
 
 <html lang="en">
 <head>
-  {% load static %}
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -21,7 +21,7 @@
 
 
   <title>호스타그램</title>
-</head>
+
 
 <!--밑에 컨텐츠에 사용하기 위한 설정 -->
 <!-- .main_body >>
@@ -205,6 +205,7 @@ span{
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(1.5px);
     -webkit-backdrop-filter: blur(1.5px);
+    z-index: 10000;
 }
 
 .modal_window {
@@ -216,6 +217,7 @@ span{
     width: 800px;
     height: 600px;
     position: relative;
+
 }
 
 .modal_title{
@@ -268,8 +270,8 @@ span{
     width: 294px;
     border: none;
 }
-</style>
-
+ </style>
+</head>
 <body>
 <!-- 여기에 테스트 해보자
 (DB Browser (SQLite)를 사용하여 프로필,좋아요 수,이미지,유저 아이디 를 입력하고 데이터가 제대로 화면에 찍히는지 확인해보는것)
@@ -286,8 +288,8 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
 -->
 
  <!--내비게이션 바 설정 부분 + 상단바가 휠로 내려도 고정되도록 설정 -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="width: 100%; height: 50px; position: fixed;">
-  <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed;width: 100%; z-index: 999">
+    <div class="container-fluid" style="justify-content: space-between;flex-wrap: nowrap; min-width: 1000px">
 
     <!--네비게이션 바에 이미지를 넣어줌 (img) /이미지의 크기를 설정해준다 (img style="height: 30px; object-fit: contain")-->
     <img style="height: 30px; object-fit: contain"
@@ -314,6 +316,7 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
  <!--div안에 div를 새로 만들어주고 class=border하여 테두리선을 표시/ 배경색은 흰색으로 지정하고 margin으로 정사각형을 만들어줌 -->
 <div class="main_body">
   <div class="left_body">
+<!--여기서 부터 피드 박스-->
     {% for feed in feed_list %}
     <div class="border feed_box">
       <div class="feed_name">
@@ -340,7 +343,7 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
         </div>
         <!--북마크 이코티콘 따로 div해서 만들어줌-->
         <div>
-          <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined" style="cursor: pointer">>
             bookmark
           </span>
         </div>
@@ -358,6 +361,8 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
       </div>
     </div>
     {% endfor %}
+
+
 <!--2번째 피드 이후에 다른 피드들은 DBSQL을 사용하여 만들어줬음-->
     <div class="border feed_box">
       <div class="feed_name">
@@ -366,7 +371,7 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
         </div>
         <span class="feed_name_txt"> miino__97 </span>
       </div>
-      <img class="feed_img" src="https://t1.daumcdn.net/cfile/tistory/206CA00E4CF0B11229">
+      <img class="feed_img" src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/27ec1068-d368-419e-9dd7-ddd9cae73fd9.jpeg">
 
       <div class="feed_icon">
         <div>
@@ -383,7 +388,7 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
           send
           </span>
         </div>
-        <!--북마크 이코티콘 따로 div해서 만들어줌-->
+        <!--북마크 이모티콘 따로 div해서 만들어줌-->
         <div>
           <span class="material-symbols-outlined">
             bookmark
@@ -394,18 +399,14 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
         <p class="feed_txt"> <b>좋아요 1065개</b></p>
       </div>
       <div class="feed_content">
-        <p class="feed_txt"> <b> jin.99 </b>언젠가 꼭 가보고 싶다.. </p>
+        <p class="feed_txt"> <b> miino__97  </b>언젠가 꼭 가보고 싶다.. </p>
       </div>
       <div class="feed_reply">
-        <span class="feed_txt"> <b> mychew </b> 풍경이 멋지네요</span>
+        <span class="feed_txt"> <b> chm </b> 풍경이 멋지네요</span>
         <span class="feed_txt"> <b> cho </b> 호수가 맑네요 </span>
       </div>
     </div>
   </div>
-
-
-
-
 
 
 <div class="right_body">
@@ -433,8 +434,10 @@ DB Browser (SQLite)를 설정하지 않으면 웹페이지에서 오류남
   </div>
 
   <div class="recommed_box">
-    <span style="color: gray"> 이용자를 위한 추천</span>
-    <span style="front-size: 12px"> 모두 보기 </span>
+            <div style="font-weight: bold; color: gray">
+                회원님을 위한 추천
+            </div>
+                <a href="#" style="font-weight: bold;color: black;text-decoration: none">모두보기</a>
   </div>
   <div>
     <div class="feed_name" style="justify-content: space-between">
