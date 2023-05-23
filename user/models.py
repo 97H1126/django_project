@@ -14,12 +14,13 @@ class User(AbstractBaseUser):
 
     '''
 
-    profile_image = models.TextField() # 프로필 이미지
+
+    profile_image = models.TextField()  # 프로필 이미지
     nickname = models.CharField(max_length=24, unique=True)
     name = models.CharField(max_length=24)
     email = models.EmailField(unique=True)
 
-    USERNAME_FIELD = "nickname"
+    USERNAME_FIELD = 'nickname'
 
-    class Meta :
-        db_table = 'User'
+    class Meta:
+        db_table = "User"

@@ -46,7 +46,7 @@ class Main(APIView):
                                   ))
 
 
-        return render(request, "config/main.html", context=dict(feeds=feed_list, user=user))
+        return render(request, "sns/main.html", context=dict(feeds=feed_list, user=user))
 
 
 class UploadFeed(APIView):
